@@ -17,27 +17,18 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 */
 
-
-module scheda_forata(scheda_larg, scheda_lung)
+include <fondo_con_pioli.scad>
+include <miroku.scad>;
+basi_bot = [108, 150];
+basi_top = [28, 120];
+intersection()
 {
-    color([0,0.7 ,0])
-    {   
-        union()
-        {
-            // Basetta forata con saldature
-            cube([scheda_larg, scheda_lung, 15]);
-        
-            //Porta usb
-            translate([10, -10, 9])
-                {
-                 cube([10,20,6]);
-            };
-        
-            // Spazio cavi in uscita
-            translate([scheda_larg-40, scheda_lung-1, 5])
-            {
-                 cube([40,20,10-0.01]);
-            };
-        };
-    };
+   translate([(-basi_top[0] + basi_bot[0])/5, 0, 0])
+    {
+        fondo_con_pioli([basi_bot[0], basi_bot[1], 8], 9, 4);
+    }
+
+    miroku(basi_bot, basi_top);
+
 };
+    

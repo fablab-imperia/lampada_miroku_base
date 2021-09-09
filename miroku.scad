@@ -16,52 +16,67 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 */
-
-
 include <pannello_inciso.scad>;
 include <base_miroku.scad>;
 include <scheda_forata.scad>;
-
-// miroku plexiglass
-spessore_miroku = 8;
-larghezza_miroku = 90;
-altezza_miroku = 135;
-
-altezza_da_terra = 60;
+include <cavo.scad>;
 
 
-
-
-base_x = spessore_miroku+100;
-base_y = larghezza_miroku+60;
-base_altezza = altezza_da_terra - 10;
-top_base_x = spessore_miroku +20;
-top_base_y = larghezza_miroku +20;
-
-
-scheda_larg=50;
-scheda_lung = 70;
-
-
-difference()
+module miroku(basi_bot, basi_top)
 {
-    // base
-    base(
-    [base_x, base_y],
-    [top_base_x, top_base_y],
-    base_altezza
-    );
-    
-    //Pannello inciso
-    translate([0, 0, altezza_miroku/2 + altezza_da_terra])
+    // miroku plexiglass
+    spessore_miroku = 8;
+    larghezza_miroku = 90;
+    altezza_miroku = 135;
+
+    altezza_da_terra = 60;
+
+
+
+
+    base_x = basi_bot[0];
+    base_y = basi_bot[1];
+    base_altezza = altezza_da_terra - 10;
+    top_base_x = basi_top[0];
+    top_base_y = basi_top[1];
+
+
+    scheda_larg=50;
+    scheda_lung = 70;
+
+
+    difference()
     {
-        pannello_inciso(larghezza_miroku, spessore_miroku, altezza_miroku);
+        // base
+       
+        base(
+        [base_x, base_y],
+        [top_base_x, top_base_y],
+        base_altezza
+        );
+        
+        
+        //Pannello inciso
+        translate([0, 0, altezza_miroku/2 + altezza_da_terra])
+        {
+            pannello_inciso(larghezza_miroku, spessore_miroku, altezza_miroku);
+        };
+        
+        // Scheda elettronica
+        translate([-scheda_larg/2+5, -base_y/2+10, 5])
+        {
+            // DA FARE UNION NEL FILE SCHEDA_FORATA
+            scheda_forata(scheda_larg, scheda_lung);
+        };
+        spessore = 10;
+        cavo([0, 0, 10], [00, larghezza_miroku/2 +spessore-0.01, altezza_da_terra+5], spessore);
     };
-    
-    // Scheda elettronica
-    translate([-scheda_larg/2+5, -base_y/2+10, 5])
-    {
-        // DA FARE UNION NEL FILE SCHEDA_FORATA
-        scheda_forata(scheda_larg, scheda_lung);
-    };
-};
+
+}
+
+/*
+basi_bot = [108, 150];
+basi_top = [28, 110];
+miroku(basi_bot, basi_top);
+*/
+
