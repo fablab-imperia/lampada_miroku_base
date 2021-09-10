@@ -23,11 +23,12 @@ basi_bot = [108, 150];
 basi_top = [28, 120];
 difference()
 {
-   
+   rialzo = 2;
+    
     miroku(basi_bot, basi_top);
-    translate([(-basi_top[0] + basi_bot[0])/5, 0, 0])
+    translate([(-basi_top[0] + basi_bot[0])/5, 0, 0 +rialzo])
     {
-        fondo_con_pioli([basi_bot[0], basi_bot[1], 8], 10, 5);
+        fondo_con_pioli([basi_bot[0], basi_bot[1], 8], 10-rialzo, 5.2);
     }
 
 };

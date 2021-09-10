@@ -23,9 +23,11 @@ basi_bot = [108, 150];
 basi_top = [28, 120];
 intersection()
 {
-   translate([(-basi_top[0] + basi_bot[0])/5, 0, 0])
+    rialzo = 2;
+    
+   translate([(-basi_top[0] + basi_bot[0])/5, 0, 0+rialzo])
     {
-        fondo_con_pioli([basi_bot[0], basi_bot[1], 8], 9, 4);
+        fondo_con_pioli([basi_bot[0], basi_bot[1], 8], 9-rialzo, 4);
     }
 
     miroku(basi_bot, basi_top);
