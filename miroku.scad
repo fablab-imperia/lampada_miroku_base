@@ -41,8 +41,8 @@ module miroku(basi_bot, basi_top)
     top_base_y = basi_top[1];
 
 
-    scheda_larg=50;
-    scheda_lung = 70;
+    scheda_larg=50+2.5;
+    scheda_lung = 70+2.5;
 
 
     difference()
@@ -68,7 +68,7 @@ module miroku(basi_bot, basi_top)
             // DA FARE UNION NEL FILE SCHEDA_FORATA
             scheda_forata(scheda_larg, scheda_lung);
         };
-        spessore = 10;
+        spessore = 15;
         cavo([0, 0, 10], [00, larghezza_miroku/2 +spessore-0.01, altezza_da_terra+5], spessore);
     };
 
